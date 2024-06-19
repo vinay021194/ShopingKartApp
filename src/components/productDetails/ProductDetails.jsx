@@ -8,13 +8,11 @@ import { CartContext } from "../../context/CardContext";
 import "./ProductDetails.css";
 
 const ProductDetails = () => {
-  // Get the id parameter from the URL
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useContext(CartContext);
 
-  // Fetch product details from the API based on the id
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -38,24 +36,26 @@ const ProductDetails = () => {
   return (
     <div className="product-details">
       <img src={product.image} alt={product.title} />
-      <h2>{product.title}</h2>
-      <p className="price">${product.price}</p>
-      <div className="rating">
-        {Array.from({ length: 5 }, (_, index) => (
-          <FaStar
-            key={index}
-            className="star"
-            color={index < Math.round(product.rating.rate) ? "gold" : "#ccc"}
-          />
-        ))}
-        <span>({product.rating.count})</span>
+      <div className="details">
+        <h2>{product.title}</h2>
+        <p className="price">${product.price}</p>
+        <div className="rating">
+          {Array.from({ length: 5 }, (_, index) => (
+            <FaStar
+              key={index}
+              className="star"
+              color={index < Math.round(product.rating.rate) ? "gold" : "#ccc"}
+            />
+          ))}
+          <span>({product.rating.count})</span>
+        </div>
+        <p className="description">{product.description}</p>
+        <p className="category">Category: {product.category}</p>
+        <button onClick={() => addToCart(product)}>
+          <FaCartShopping className="cart-icon" />
+          Add to Cart
+        </button>
       </div>
-      <p className="description">{product.description}</p>
-      <p className="category">Category: {product.category}</p>
-      <button onClick={() => addToCart(product)}>
-        <FaCartShopping className="cart-icon" />
-        Add to Cart
-      </button>
     </div>
   );
 };

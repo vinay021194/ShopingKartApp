@@ -93,3 +93,7 @@
 .product-card button .cart-icon {
   margin-right: 5px;
 }
+.product-card a {
+  text-decoration: none;
+  color: inherit; /* Ensure the text color is inherited */
+}
