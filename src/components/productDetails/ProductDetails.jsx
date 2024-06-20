@@ -12,6 +12,7 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const { addToCart } = useContext(CartContext);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -28,6 +29,10 @@ const ProductDetails = () => {
     };
     fetchProduct();
   }, [id]);
+  const handleAddToCart = () => {
+    addToCart(product);
+    setAddedToCart(true);
+  };
 
   if (loading) {
     return <Loading />;
@@ -51,10 +56,16 @@ const ProductDetails = () => {
         </div>
         <p className="description">{product.description}</p>
         <p className="category">Category: {product.category}</p>
-        <button onClick={() => addToCart(product)}>
-          <FaCartShopping className="cart-icon" />
-          Add to Cart
-        </button>
+        {!addedToCart ? (
+          <button onClick={handleAddToCart}>
+            <FaCartShopping className="cart-icon" />
+            Add to Cart
+          </button>
+        ) : (
+          <Link to="/cart">
+            <button>Go to Cart</button>
+          </Link>
+        )}
       </div>
     </div>
   );
