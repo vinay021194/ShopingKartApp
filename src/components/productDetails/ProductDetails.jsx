@@ -37,7 +37,6 @@ const ProductDetails = () => {
   if (loading) {
     return <Loading />;
   }
-
   return (
     <div className="product-details">
       <img src={product.image} alt={product.title} />
