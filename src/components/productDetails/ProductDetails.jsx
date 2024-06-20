@@ -63,6 +63,7 @@ const ProductDetails = () => {
           </button>
         ) : (
           <Link to="/cart">
+            <FaCartShopping className="cart-icon" />
             <button>Go to Cart</button>
           </Link>
         )}
